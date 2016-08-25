@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Winform&Html</title>
+    <meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9"/>
+    <meta name="viewport" content="width=device-width, initial-scale=0.1, maximum-scale=10, user-scalable=yes"/>
+	<link rel="stylesheet" type="text/css"  href= "./css/bootstrap.min.css">
+	<script src="./js/demo.js"></script>
+	<script  type='text/javascrit'  src="./js/jquery-2.2.1.min.js"></script>
+	<script src="./js/jtopo-0.4.8-min.js"></script>
+</head>
+<body>
+	<header style="float: right;">
+		<button id = "tipBtn" class="btn btn-success btn-bg">Tip按钮</button>
+        <button id = "edit-position" class="btn btn-success btn-bg" title="Save my Setting" onclick="save_img()" style="display: block;">保存位置修改</button>
+    </header>
+    <canvas width="500" height="550" id="canvas" style=" background-color:#111111; border:1px solid #444;"></canvas>
+    <footer>
+        <span name="line_id" style="display: none;"></span>
+        <span name="line_name" style="display: none;"></span>
+        <div id = "tip" style="display: none;color:white; background-color:rgba(0,0,0,1); position:absolute;
+        left: 100px; top:100px; z-index: 10000;padding: 10px;">App<br>PPP<br>kiki</div>
+    </footer>
+	<script>
+		$(function(){
+			var canvas = document.getElementById('canvas');			
+			var stage = new JTopo.Stage(canvas);
+			//显示工具栏
+			showJTopoToobar(stage);
+			var scene = new JTopo.Scene(stage);
+			scene.background = './img/bg.jpg';
+			
+			var node = new JTopo.Node("Hello");							
+			node.setLocation(409, 269);
+			scene.add(node);
+
+			node.mousedown(function(event){
+				if(event.button == 2){
+					node.text = '按下右键';					
+				}else if(event.button == 1){
+					node.text = '按下中键';					
+				}else if(event.button == 0){
+					node.text = '按下左键';	
+				}				
+			});
+			
+			node.mouseup(function(event){				
+				if(event.button == 2){
+					node.text = '松开右键';					
+				}else if(event.button == 1){
+					node.text = '松开中键';					
+				}else if(event.button == 0){
+					node.text = '松开左键';	
+				}
+			});	
+			node.click(function(event){					
+				console.log("单击");				
+			});	
+			node.dbclick(function(event){				
+				console.log("双击");				
+			});
+			node.mousedrag(function(event){				
+				console.log("拖拽");
+			});	
+			node.mouseover(function(event){				
+				console.log("mouseover");				
+			});
+			node.mousemove(function(event){				
+				console.log("mousemove");				
+			});	
+			node.mouseout(function(event){				
+				console.log("mouseout");				
+			});	
+
+		});
+		
+		
+	
+	</script>
+</body>
+</html>
